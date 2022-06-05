@@ -1,2 +1,3 @@
 # Transliterator
  
+Requirements: NLTK
