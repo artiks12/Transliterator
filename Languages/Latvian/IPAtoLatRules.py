@@ -1,4 +1,4 @@
-# Noteikumi, kas pārveido IPA skaņas uz latviešu burtiem/skaņām
+# Rules for converting IPA to Latvian
 IPAtoLat = {
     "AA":["ā","Ā"],
     "AE":["a","A"], # 'æ'

@@ -1,7 +1,7 @@
 import nltk
 import re
 
-# Function to convert  
+# Function for getting list as string
 def listToString(lists): 
     
     # initialize an empty string
@@ -25,11 +25,10 @@ def listToString(lists):
         str1 += "]"
     str1 += "]"
             
-
-    
     # return string  
     return str1
 
+# function for getting phonetics without stresses
 def get_phonetics(item):
     result = []
     for phone in item:
@@ -39,40 +38,50 @@ def get_phonetics(item):
             result.append(phone)
     return result
 
+# function that makes a dictionary where words have no stresses
+def prepareDictionary():
+    arpabet = nltk.corpus.cmudict.dict()
+    my_dict = {}
 
-arpabet = nltk.corpus.cmudict.dict()
-my_dict = {}
-count1 = 0
-count2 = 0
-
-for key, value in arpabet.items():
-    result = []
-    for item in value:
-        unique = True
-        phone = get_phonetics(item)
-        for check in result:
-            if(len(phone) != len(check)):
-                continue
-            else:
-                unique = False
-                for x in range(len(check)):
-                    if(check[x] != phone[x]):
-                        unique = True
+    # goes through every entry in nltk dictionary
+    for key, value in arpabet.items():
+        result = []
+        # goes through every pronounciation in an entry
+        for item in value:
+            unique = True
+            phone = get_phonetics(item) # Gets phonetics with no stresses
+            # Goes through result list
+            for check in result:
+                # the length for both phonemes is not equal, therefore it is unique
+                if(len(phone) != len(check)):
+                    continue
+                else:
+                    unique = False
+                    # checks every sound in phones
+                    for x in range(len(check)):
+                        if(check[x] != phone[x]):
+                            unique = True
+                            break
+                    if(unique == False):
                         break
-                if(unique == False):
-                    break
-        if(unique == True):
-            result.append(phone)
-    my_dict[key] = result
+            if(unique == True):
+                result.append(phone)
+        my_dict[key] = result
 
-f = open("Dictionary.py", "w")
-f.write("TwoOrMore = {\n")
-for key, value in my_dict.items():
-    string = "    " + '"' + key + '":' + listToString(value) + ",\n"
-    f.write(string)
-        
-f.write("}")
-f.close()
-
-        
-
+    # Creates a Dictionary.py file
+    f = open("Dictionary.py", "w")
+    f.write("Dictionary = {\n")
+    for key, value in my_dict.items():
+        if(len(value) == 1):
+            if("'" in key):
+                string = "    " + '"' + key + '":' + listToString(value) + ",\n"
+                f.write(string)
+            elif('"' in key):
+                string = "    " + "'" + key + "':" + listToString(value) + ",\n"
+                f.write(string)
+            else:
+                string = "    " + '"' + key + '":' + listToString(value) + ",\n"
+                f.write(string)
+            
+    f.write("}")
+    f.close()
