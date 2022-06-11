@@ -30,30 +30,3 @@ def pronounce(original,word,dict,space):
         return space + result # Pievienojam vaļu klāt rezultātam.
     except Exception as e:
         return word
-
-# Galvenā metode
-def main():
-    arpabet = nltk.corpus.cmudict.dict() # Iegūstam vārdnīcu
-
-    languageFrom = "English" # Valoda no kuras transliterēt
-    languageTo = "Latvian" # Valoda uz kuru transliterēt
-
-    string = "I run with my friends. You run with your friends." # Teikums, kuru jātransliterē
-
-    Sentence = nltk.pos_tag(nltk.word_tokenize(string)) # Iegūstam katrai teikuma daļai vārdšķiru
-    Words = nltk.word_tokenize(string.lower()) # Sadalam katru teikuma daļu pa vārdiem/pieturzīmem
-
-    print(Sentence)
-    print(Words)
-
-    result = "" # Transliterēšanas rezultāts
-    # Ejam cauri katrai teikuma daļai
-    for x in range(len(Sentence)):
-        if(x == 0 or Words[x] == "."):
-            result += pronounce(Sentence[x],Words[x],arpabet,"")
-        else:
-            result += pronounce(Sentence[x],Words[x],arpabet," ")
-        
-    print(result)
-
-main()
