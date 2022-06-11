@@ -1,21 +1,14 @@
-# contains pronounciations depending on part of speach
-PoT = {
-    "usNNP":['Y','UW','EH','S'],
-    "usPRP":['AH','S']
-}
-
-apostrophes = {
-    "anyone'll":[['EH','N','IY','W','AH','N',"'",'AH','L']],
-    "anytime'll":[['EH','N','IY','T','AY','M',"'",'AH','L']],
-    "aren't":[['AA','R','AH','N',"'",'T'],['AA','R','N',"'",'T']],
-    "ba'ath":[['B',"'",'AA','TH'],['B','AH',"'",'AA','TH']],
-    "baha'is":[['B','AA','HH','AA',"'",'IH','Z']],
-    "bel'c":[['B','EH','L',"'",'K']],
-    "b'gosh":[['B','AH',"'",'G','AO','SH']],
-    "b'nai":[['B','AH',"'",'N','EY']],
-    "'bout":[["'",'B','AW','T']],
-    "b'rith":[['B',"'",'R','IH','TH']],
-    
+Dictionary = {
+    "anyone'll":[['EH','N','IY','W','AH','N','AH','L']],
+    "anytime'll":[['EH','N','IY','T','AY','M','AH','L']],
+    "aujourd'hui":[['OW','ZH','AO','R','D','W','IY']],
+    "ba'ath":[['B','AA','TH'],['B','AH','AA','TH']],
+    "baha'is":[['B','AA','HH','AA','IH','Z']],
+    "bel'c":[['B','EH','L','K']],
+    "b'gosh":[['B','AH','G','AO','SH']],
+    "b'nai":[['B','AH','N','EY']],
+    "'bout":[['B','AW','T']],
+    "b'rith":[['B','R','IH','TH']],
     "cara'veras":[['K','AA','R','AH','V','EH','R','AH','Z']],
     "'cause":[['K','AH','Z']],
     "c'est":[['S','EH','S','T'],['S','EY']],

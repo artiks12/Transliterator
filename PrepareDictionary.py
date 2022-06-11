@@ -67,12 +67,15 @@ def prepareDictionary():
             if(unique == True):
                 result.append(phone)
         my_dict[key] = result
+    return my_dict
 
+def printDictionary():
+    dict = prepareDictionary()
     # Creates a Dictionary.py file
     f = open("Dictionary.py", "w")
     f.write("Dictionary = {\n")
-    for key, value in my_dict.items():
-        if(len(value) == 1):
+    for key, value in dict.items():
+        if("'" in key and not("'s" in key) and not(key[-1] == "'") and not(key.startswith("o'")) and not(key.endswith("'t"))):
             if("'" in key):
                 string = "    " + '"' + key + '":' + listToString(value) + ",\n"
                 f.write(string)

@@ -1,7 +1,7 @@
 # Rules for converting IPA to Latvian
 IPAtoLat = {
     "AA":["ā","Ā"],
-    "AE":["a","A"], # 'æ'
+    "AE":["e","E"], # 'æ'
     "AH":["a","A"],
     "AO":["oo","Oo"],
     "AW":["au","Au"],
@@ -11,7 +11,7 @@ IPAtoLat = {
     "D":["d","D"],
     "DH":["d","D"],  # 'ð' Vai labāk 'z'
     "EH":["e","E"],
-    "ER":["ē","Ē"],
+    "ER":["ēr","Ēr"],
     "EY":["ei","Ei"],
     "F":["f","F"],
     "G":["g","G"],

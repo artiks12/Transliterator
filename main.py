@@ -6,10 +6,19 @@ from PrepareDictionary import *
 languagesFrom = [ "british" , "american"] # Supported languages from witch text can be transliterated.
 languagesTo = [ "latvian" ] # Supported languages to witch text can be transliterated.
 
-# Main transliteration function
-def transliterate(text,languageFrom,languageTo):
+# Gets the text after function name
+def getSetence(command):
+    space = False
+    for x in range(len(command)):
+        if(space == False and command[x] == " "):
+            space = True
+        if(space == True and command[x] != " "):
+            return command[x:len(command)]
 
-    ipa = getIPA(text,languageFrom) # Gets list of word pronounciations
+# Main transliteration function
+def transliterate(text,languageFrom,languageTo,single):
+
+    ipa = getIPA(text,languageFrom,single) # Gets list of word pronounciations
     
     result = getTransliteration(ipa,text,languageTo) # Gets transliteration result
 
@@ -19,6 +28,10 @@ def transliterate(text,languageFrom,languageTo):
 # Interface code
 def main():
     #prepareDictionary()
+
+    printDictionary()
+
+    print(nltk.pos_tag)
 
     languageFrom = "american" # Default values for languageFrom
     languageTo = "latvian" # Default values for languageTo
@@ -37,12 +50,7 @@ def main():
             # "transliterate" command
             if(method[0] == "t" or method[0] == "transliterate"):
                 if(len(method) >= 2):
-                    # Gets the text, that is written after "transliterate" or "t"
-                    for x in range(len(command)):
-                        if(x!=0 and command[x] != " "):
-                            print(command[x:len(command)])
-                            transliterate(command[x:len(command)],languageFrom,languageTo)
-                            break
+                    transliterate(getSetence(command),languageFrom,languageTo,0)
                 elif(len(method) == 1):
                     print("No text given.")
             
@@ -54,7 +62,7 @@ def main():
                         f = open(method[1],'r')
                         text = f.read()
                         print(text)
-                        transliterate(text,languageFrom,languageTo)
+                        transliterate(text,languageFrom,languageTo,0)
                         f.close()
                     else:
                         print("File doesn't exist. Is the path or file name specified correectly?")
@@ -100,6 +108,23 @@ def main():
                     print("--transliterate or t:    shows commands. Takes a text as argument.")
                 else:
                     print("Too many arguments given.")
+            
+            # Transliterates a single word. Gets all pronounciations
+            elif(method[0] == "w" or method[0] == "word"):
+                if(len(method) == 2):
+                    transliterate(method[1],languageFrom,languageTo,1)
+                elif(len(method) == 1):
+                    print("No text given.")
+                else:
+                    print("Too many arguments given.")
+
+            # Check part of speach tags for every word in text.
+            elif(method[0] == "pos" or method[0] == "partOfSpeach"):
+                if(len(method) >= 2):
+                    sentence = getSetence(command)
+                    print(nltk.pos_tag(nltk.word_tokenize(sentence)))
+                elif(len(method) == 1):
+                    print("No text given.")
             
             # Anything that is not a proper command
             elif(method[0] != "q" and method[0] != "quit"):
