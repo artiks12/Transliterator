@@ -72,19 +72,16 @@ def prepareDictionary():
 def printDictionary():
     dict = prepareDictionary()
     # Creates a Dictionary.py file
-    f = open("Dictionary.py", "w")
-    f.write("Dictionary = {\n")
+    print("Dictionary = {")
     for key, value in dict.items():
-        if("'" in key and not("'s" in key) and not(key[-1] == "'") and not(key.startswith("o'")) and not(key.endswith("'t"))):
+        if("'re" in key):
             if("'" in key):
-                string = "    " + '"' + key + '":' + listToString(value) + ",\n"
-                f.write(string)
+                string = "    " + '"' + key + '":' + listToString(value) + ","
+                print(string)
             elif('"' in key):
-                string = "    " + "'" + key + "':" + listToString(value) + ",\n"
-                f.write(string)
+                string = "    " + "'" + key + "':" + listToString(value) + ","
+                print(string)
             else:
-                string = "    " + '"' + key + '":' + listToString(value) + ",\n"
-                f.write(string)
-            
-    f.write("}")
-    f.close()
+                string = "    " + '"' + key + '":' + listToString(value) + ","
+                print(string) 
+    print("}")

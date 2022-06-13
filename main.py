@@ -2,6 +2,7 @@ from pathlib import Path
 from getIPA import getIPA
 from getTransliteration import getTransliteration
 from PrepareDictionary import *
+import nltk
 
 languagesFrom = [ "british" , "american"] # Supported languages from witch text can be transliterated.
 languagesTo = [ "latvian" ] # Supported languages to witch text can be transliterated.
@@ -20,18 +21,18 @@ def transliterate(text,languageFrom,languageTo,single):
 
     ipa = getIPA(text,languageFrom,single) # Gets list of word pronounciations
     
-    result = getTransliteration(ipa,text,languageTo) # Gets transliteration result
+    result = getTransliteration(ipa,languageTo) # Gets transliteration result
 
     print(result) # Outputs the result
     
 
 # Interface code
 def main():
-    #prepareDictionary()
+    #nltk.download('cmudict')
+    #nltk.download('punkt')
+    #nltk.download('averaged_perceptron_tagger')
 
-    printDictionary()
-
-    print(nltk.pos_tag)
+    #printDictionary()
 
     languageFrom = "american" # Default values for languageFrom
     languageTo = "latvian" # Default values for languageTo
@@ -103,9 +104,11 @@ def main():
                     print("--help or h:             shows commands. No arguments.")
                     print("--languages or l:        shows set languages. No arguments.")
                     print("--parse or p:            get text from file and transliterates it. Takes file path as argument.")
+                    print("--partOfSpeach or pos:   Does a part of speech tagging for given text")
                     print("--quit or q:             stops program. No arguments.")
                     print("--set or s:              sets languages. Takes two strings as argument: language from and language to.")
-                    print("--transliterate or t:    shows commands. Takes a text as argument.")
+                    print("--transliterate or t:    get text from input and transliterates it. Takes a text as argument.")
+                    print("--word or w:             Transliterates a single word, giving every single pronounciation.")
                 else:
                     print("Too many arguments given.")
             

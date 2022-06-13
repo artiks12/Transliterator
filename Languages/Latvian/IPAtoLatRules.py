@@ -23,7 +23,7 @@ IPAtoLat = {
     "L":["l","L"],
     "M":["m","M"],
     "N":["n","N"],
-    "NG":["ņ","Ņ"], # Vai labāk 'ng'
+    "NG":["ng","Ng"],
     "OW":["ou","Ou"], 
     "OY":["oi","Oi"],
     "P":["p","P"],
