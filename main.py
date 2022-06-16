@@ -89,6 +89,30 @@ def main():
                     print('Missing arguments "languageFrom" and "languageTo"')
                 else:
                     print("Too many arguments given.")
+
+            # "setFrom" command
+            elif(method[0] == "sf" or method[0] == "setFrom"):
+                if(len(method) == 2):
+                    if(method[1] in languagesFrom):
+                        languageFrom = method[1]
+                    else:
+                        print(method[1] + ' is either not given in lowercase or is not supported as a value for "languageFrom"')
+                elif(len(method) == 1):
+                    print('Missing argument "languageFrom"')
+                else:
+                    print("Too many arguments given.")
+
+            # "setFrom" command
+            elif(method[0] == "st" or method[0] == "setTo"):
+                if(len(method) == 2):
+                    if(method[1] in languagesTo):
+                        languageTo = method[1]
+                    else:
+                        print(method[1] + ' is either not given in lowercase or is not supported as a value for "languageTo"')
+                elif(len(method) == 1):
+                    print('Missing argument "languageTo"')
+                else:
+                    print("Too many arguments given.")
             
             # "languages" command
             elif(method[0] == "l" or method[0] == "languages"):
@@ -102,11 +126,14 @@ def main():
             elif(method[0] == "h" or method[0] == "help"):
                 if(len(method) == 1):
                     print("--help or h:             shows commands. No arguments.")
+                    print("--ipa:                   Gets the arpabet format of a word from cmudict.")
                     print("--languages or l:        shows set languages. No arguments.")
                     print("--parse or p:            get text from file and transliterates it. Takes file path as argument.")
-                    print("--partOfSpeach or pos:   Does a part of speech tagging for given text")
+                    print("--pos:                   Does a part of speech tagging for given text")
                     print("--quit or q:             stops program. No arguments.")
                     print("--set or s:              sets languages. Takes two strings as argument: language from and language to.")
+                    print("--setFrom or sf:         sets language from which to transliterate. Takes one string as argument.")
+                    print("--setTo or st:           sets language to which to transliterate. Takes one string as argument.")
                     print("--transliterate or t:    get text from input and transliterates it. Takes a text as argument.")
                     print("--word or w:             Transliterates a single word, giving every single pronounciation.")
                 else:
@@ -120,9 +147,20 @@ def main():
                     print("No text given.")
                 else:
                     print("Too many arguments given.")
+            
+            # Gets IPA format for single word
+            elif(method[0] == "ipa"):
+                if(len(method) == 2):
+                    dict = prepareDictionary()
+                    ipa = dict.get(method[1])
+                    print(ipa)
+                elif(len(method) == 1):
+                    print("No text given.")
+                else:
+                    print("Too many arguments given.")
 
             # Check part of speach tags for every word in text.
-            elif(method[0] == "pos" or method[0] == "partOfSpeach"):
+            elif(method[0] == "pos"):
                 if(len(method) >= 2):
                     sentence = getSetence(command)
                     print(nltk.pos_tag(nltk.word_tokenize(sentence)))

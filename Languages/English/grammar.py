@@ -3,7 +3,11 @@ PoT = {
     "usNNP":['Y','UW','EH','S'],
     "usPRP":['AH','S'],
     "readVB":['R',"IY","D"],
-    "readVBP":['R',"EH","D"]
+    "readVBP":['R',"EH","D"],
+    "liveJJ":['L', 'AY', 'V'],
+    "liveNN":['L', 'AY', 'V'],
+    "liveVB":['L', 'IH', 'V'],
+    "liveVBP":['L', 'IH', 'V'],
 }
 
 apostrophes = {
@@ -43,4 +47,9 @@ apostrophes = {
     "'tis":[["'",'T','IH','Z']],
     "'twas":[["'",'T','W','AH','Z']],
     "y'all":[['Y',"'",'AO','L']]
+}
+
+vowels = {
+    "to":['T','UH'],
+    "the":['DH', 'IY'],
 }

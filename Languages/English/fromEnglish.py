@@ -1,6 +1,6 @@
 import nltk
 from Languages.English.region import *
-from Languages.English.partOfSpeach import *
+from Languages.English.grammar import *
 from Languages.English.Dictionary import *
 from PrepareDictionary import *
 from Punctuations import *
@@ -19,6 +19,10 @@ def case(text):
         return 'TITLE'
     else:
         return 'LOWER'
+
+def vowel(s):
+    letter = s.lower()
+    return letter == 'a' or letter == 'e' or letter == 'i' or letter == 'u' or letter == 'o'
 
 # Main function for getting english pronounciations
 def fromEnglish(text,language,single):
@@ -48,8 +52,26 @@ def fromEnglish(text,language,single):
             original = '"'
             token = '"'
 
+        # Numbers
+        if(pos == 'CD'):
+            temp = [original,'LOWER']
+            result.append(temp)
+            count+=1
+
+        # To
+        elif(token in vowels):
+            temp = getNewElement(vowels[token])
+            temp.append(case(original))
+            if(x != len(Sentence)-1):
+                if(not(vowel(words[x+1][0]))):
+                    temp[1] = 'AH'
+            else:
+                temp[1] = 'AH'
+            result.append(temp)
+            count+=1
+
         # Cases when token starts with apostrophe
-        if(original.startswith("'")):
+        elif(original.startswith("'")):
             # Cases when token is an apostrophe
             if(original == "'"):
                 count-=1
@@ -193,10 +215,11 @@ def fromEnglish(text,language,single):
             count+=1
 
         # Words that have -
-        elif('-' in original):
+        elif('-' in original and not(original == '-' or original == '--')):
             # Split word into parts, that are divided by -
             tokenParts = token.split('-')
             originalParts = original.split('-')
+            
             list = []
             first = 1
             c = 'LOWER'
@@ -248,9 +271,15 @@ def fromEnglish(text,language,single):
                     finish.append('/')
                 for elem in l:
                     finish.append(elem)
-
+            
             finish.append(c)
+
+            if(originalParts[-1] == '' or finish[0] == '//'):
+                finish.remove('//')
+
             result.append(finish)
+
+            print(finish)
             count+=1
 
         # All other cases
@@ -274,9 +303,9 @@ def fromEnglish(text,language,single):
 # gets pronounciations for a word, depending on region
 def pronounceRegion(original,pos,word,dict,region,single):
     phones = dict.get(word) # Gets all pronounciations
-    
+
     # Punctuation
-    if(isPunctuation(original) or isIncloser(original)):
+    if(isPunctuation(original) or isIncloser(original) or original == '-'):
         return [original]
 
     # Paragraph
@@ -304,17 +333,19 @@ def pronounceRegion(original,pos,word,dict,region,single):
             search = word + pos
             return getNewElement(region[search])
         
+        # Pronounciation not found
+        elif(phones == None):
+            return ["/"+original+"/"]
+
         # there is only one pronounciation for word
         elif(len(phones) == 1):
             return getNewElement(phones[0])
         
         # Default
-        elif(phones != None):
+        else:
             return getNewElement(getSingle(word,Dictionary,region,phones))
 
-        # Pronounciation not found
-        else:
-            return ["/"+original+"/"]
+        
     
     # One Word
     else:
@@ -370,13 +401,14 @@ def getSingle(word,Dictionary,region,phones):
     # default search
     result = []
     first = 1
-    for phone in phones:
-        if(first == 1):
-            first = 0
-        else:
-            result.append('/')
-        for item in phone:
-            result.append(item)
+    if(phones != None):
+        for phone in phones:
+            if(first == 1):
+                first = 0
+            else:
+                result.append('/')
+            for item in phone:
+                result.append(item)
     return result
 
 def getNewElement(phones):

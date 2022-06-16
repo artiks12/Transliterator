@@ -1,7 +1,7 @@
 # Rules for converting IPA to Latvian
 IPAtoLat = {
     "AA":["ā","Ā"],
-    "AE":["e","E"], # 'æ'
+    "AE":["e","E"], # 'æ' Vai labāk 'a'
     "AH":["a","A"],
     "AO":["oo","Oo"],
     "AW":["au","Au"],
@@ -11,7 +11,7 @@ IPAtoLat = {
     "D":["d","D"],
     "DH":["d","D"],  # 'ð' Vai labāk 'z'
     "EH":["e","E"],
-    "ER":["ēr","Ēr"],
+    "ER":["ēr","Ēr"], # 'ɜ' Vai labāk 'ē'
     "EY":["ei","Ei"],
     "F":["f","F"],
     "G":["g","G"],
@@ -23,7 +23,7 @@ IPAtoLat = {
     "L":["l","L"],
     "M":["m","M"],
     "N":["n","N"],
-    "NG":["ng","Ng"],
+    "NG":["ng","Ng"], # 'ŋ' Vai labāk 'ņ'
     "OW":["ou","Ou"], 
     "OY":["oi","Oi"],
     "P":["p","P"],
@@ -35,7 +35,7 @@ IPAtoLat = {
     "UH":["u","U"],
     "UW":["ū","Ū"],
     "V":["v","V"],
-    "W":["v","V"],# Vai labāk 'u' vai 'uv'
+    "W":["v","V"],# 'w' Vai labāk 'u' vai 'uv'
     "Y":["j","J"],
     "Z":["z","Z"],
     "ZH":["ž","Ž"]
